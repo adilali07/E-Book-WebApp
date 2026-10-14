@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Leafline – Ebook Reader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- AUTH -->
+<section id="auth" class="hidden">
+  <div class="auth-art">
+    <h1>Leafline</h1>
+    <p>Your books, your place in them, and the lines worth keeping.</p>
+    <div class="spines" aria-hidden="true"><i style="height:70%"></i><i style="height:95%"></i><i style="height:55%"></i><i style="height:85%"></i><i style="height:65%"></i><i style="height:100%"></i><i style="height:75%"></i></div>
+  </div>
+  <div class="auth-form">
+    <div class="auth-card">
+      <h2 id="authTitle">Welcome back</h2>
+      <div class="tabs" role="tablist">
+        <button role="tab" id="tabIn" aria-selected="true">Sign in</button>
+        <button role="tab" id="tabUp" aria-selected="false">Create account</button>
+      </div>
+      <div id="nameWrap" class="hidden"><label for="aName">Name</label><input id="aName" type="text" autocomplete="name"></div>
+      <label for="aEmail">Email</label><input id="aEmail" type="email" autocomplete="email">
+      <label for="aPass">Password</label><input id="aPass" type="password" autocomplete="current-password">
+      <div class="err" id="aErr" role="alert"></div>
+      <button class="btn" id="aGo">Sign in</button>
+      <p class="note">Demo login: accounts are stored only in this browser. Connect a backend before real use.</p>
+    </div>
+  </div>
+</section>
+
+<!-- LIBRARY -->
+<section id="library" class="hidden">
+  <header class="top">
+    <span class="brand">Leafline</span>
+    <span class="who" id="who"></span>
+    <button class="icon" id="themeBtn" title="Switch theme" aria-label="Switch theme">◐</button>
+    <button class="btn ghost sm" id="logout">Sign out</button>
+  </header>
+  <main class="lib">
+    <div class="tools">
+      <input type="search" id="libSearch" placeholder="Search title or author" aria-label="Search library">
+      <select id="libSort" aria-label="Sort books"><option value="recent">Recently read</option><option value="title">Title A–Z</option><option value="added">Recently added</option></select>
+      <button class="btn" id="upBtn">Upload book</button>
+      <input type="file" id="file" accept=".epub,.txt,.md,.html,.htm" multiple hidden>
+    </div>
+    <div class="drop" id="drop">Drop EPUB, TXT, MD or HTML files here</div>
+    <div class="grid" id="grid"></div>
+  </main>
+</section>
+
+<!-- READER -->
+<section id="reader" class="hidden" data-rt="light">
+  <div class="rbar">
+    <button class="icon" id="rBack" aria-label="Back to library">← Library</button>
+    <button class="icon" id="rToc" aria-label="Contents">☰</button>
+    <div class="rtitle" id="rTitle"></div>
+    <button class="icon" id="rSearch" aria-label="Search in book">Search</button>
+    <button class="icon" id="rMark" aria-label="Add bookmark">🔖</button>
+    <button class="icon" id="rList" aria-label="Bookmarks">Marks</button>
+    <button class="icon" id="rSet" aria-label="Reading settings">Aa</button>
+  </div>
+  <div id="scroller"><article id="page"></article></div>
+  <div class="rfoot">
+    <button class="icon" id="prev" aria-label="Previous chapter">‹</button>
+    <span id="chLabel"></span>
+    <div class="bar"><i id="pBar" style="width:0"></i></div>
+    <span id="pPct">0%</span>
+    <button class="icon" id="next" aria-label="Next chapter">›</button>
+  </div>
+
+  <aside class="panel left hidden" id="pToc"><header>Contents <button class="icon" data-close>✕</button></header><div class="body" id="tocList"></div></aside>
+  <aside class="panel right hidden" id="pSearch"><header>Search <button class="icon" data-close>✕</button></header>
+    <div class="body"><input type="search" id="qIn" placeholder="Search this book" aria-label="Search in book"><div id="qRes"></div></div></aside>
+  <aside class="panel right hidden" id="pMarks"><header>Bookmarks <button class="icon" data-close>✕</button></header><div class="body" id="markList"></div></aside>
+  <aside class="panel right hidden" id="pSet"><header>Reading settings <button class="icon" data-close>✕</button></header>
+    <div class="body">
+      <div class="set"><span>Theme</span><div class="seg" data-k="rt"><button data-v="light">Light</button><button data-v="sepia">Sepia</button><button data-v="dark">Dark</button></div></div>
+      <div class="set"><span>Font size</span><div class="seg"><button id="fsM">A−</button><button id="fsP">A+</button></div></div>
+      <div class="set"><span>Spacing</span><div class="seg" data-k="lh"><button data-v="1.45">Tight</button><button data-v="1.7">Normal</button><button data-v="2">Loose</button></div></div>
+      <div class="set"><span>Width</span><div class="seg" data-k="w"><button data-v="560">Narrow</button><button data-v="680">Medium</button><button data-v="860">Wide</button></div></div>
+      <div class="set"><span>Align</span><div class="seg" data-k="al"><button data-v="left">Left</button><button data-v="justify">Justify</button></div></div>
+      <p class="note">Shortcuts: ← → chapters, B bookmark, / search, Esc closes panels.</p>
+    </div></aside>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
